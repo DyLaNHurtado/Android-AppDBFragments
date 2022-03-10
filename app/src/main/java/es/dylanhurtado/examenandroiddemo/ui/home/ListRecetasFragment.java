@@ -53,6 +53,7 @@ public class ListRecetasFragment extends Fragment implements onClickListener {
 
     @Override
     public void onclick(int position) {
+
         Toast.makeText(getActivity(), ""+position, Toast.LENGTH_SHORT).show();
     }
 }

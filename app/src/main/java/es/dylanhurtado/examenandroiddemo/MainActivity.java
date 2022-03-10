@@ -1,10 +1,14 @@
 package es.dylanhurtado.examenandroiddemo;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.Toast;
+import android.widget.Toolbar;
+import com.google.android.material.internal.NavigationMenu;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -15,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import es.dylanhurtado.examenandroiddemo.databinding.ActivityMainBinding;
+import es.dylanhurtado.examenandroiddemo.ui.home.AddDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        setSupportActionBar(binding.appBarMain.toolbar);
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -37,13 +42,17 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
         button = findViewById(R.id.buttonAdd);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AddDialog addDialog = new AddDialog();
+                addDialog.show(getSupportFragmentManager(), "AddDialog");
             }
         });
     }
